@@ -14,11 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.urls import path, include
+from django.views.generic import RedirectView
 from django.contrib import admin
-from django.urls import path,include
 
 
 urlpatterns = [
-    path('todo/',include('todo.urls')),
+    path('', RedirectView.as_view(url='/todo/')),  # redirect root URL to /todo/
+    path('todo/', include('todo.urls')),           # your todo app URLs
     path('admin/', admin.site.urls),
 ]
+
